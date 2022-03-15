@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class PropertiesController extends Controller
 {
+
+    protected $property;
+
+    public function __construct(Property $property){
+        $this->property = $property;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,13 @@ class PropertiesController extends Controller
      */
     public function index()
     {
-        //
+        $property= Property::all();
+        $response = [
+            'properties' => $property
+        ];
+        return response()->json($response, 200);
+        
+    
     }
 
     /**
@@ -34,7 +47,18 @@ class PropertiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type' => 'required',
+            'location' => 'required',
+            'image_path' => 'required',
+            'status' => 'required',
+            // 'user_id' => 'required',
+            
+        ]);
+
+        $property =  Property::Create($request->all());
+
+        return response()->json($property, 201);
     }
 
     /**
