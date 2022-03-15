@@ -68,7 +68,10 @@ class PropertiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        return "gud";
+    
+        
     }
 
     /**
@@ -79,6 +82,6 @@ class PropertiesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "bad";
     }
 }
