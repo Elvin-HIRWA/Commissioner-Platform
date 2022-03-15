@@ -52,7 +52,7 @@ class PropertiesController extends Controller
             'location' => 'required',
             'image_path' => 'required',
             'status' => 'required',
-            // 'user_id' => 'required',
+            'user_id' => 'required',
             
         ]);
 
