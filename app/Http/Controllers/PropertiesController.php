@@ -69,7 +69,7 @@ class PropertiesController extends Controller
     public function update(Request $request, $id)
     {
 
-        return "gud";
+        return "bad";
     
         
     }
