@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
+            $table->string('location');
+            $table->integer('image');
+            $table->string('status');
+            $table->string('user_id');
             $table->timestamps();
         });
     }
