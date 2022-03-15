@@ -5,6 +5,7 @@ use App\Http\Controllers\PropertiesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,3 +27,6 @@ Route::post('/register', [CommissionerController::class, 'register']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::put('/property/{id}', [PropertiesController::class, 'update']);
+Route::delete('/property/{id}',[PropertiesController::class, 'destroy']);

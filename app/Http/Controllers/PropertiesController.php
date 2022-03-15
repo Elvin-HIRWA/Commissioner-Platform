@@ -6,9 +6,9 @@ use App\Models\Property;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
 class PropertiesController extends Controller
 {
 
@@ -64,4 +64,69 @@ class PropertiesController extends Controller
 
 
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'type' =>'required',
+            'location' =>'required',
+            'image_path' =>'required',
+            'status' =>'required'
+             
+        ]);
+
+        $property = Property::find($id);
+        $type =$request->input('type');
+        $location = $request->input('location');
+        $image_path = $request->input('image_path');
+        $status = $request->input('status');
+
+        $property->type = $type;
+        $property->location = $location;
+        $property->image_path = $image_path;
+        $property->status = $status;
+
+        $response = [
+            'msg' => 'Property update successfully',
+            'property' =>$property
+        ];
+
+
+        return response()->json($response, 200);
+        
+
+    
+        
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+       $property =Property::find($id);
+
+       if (!$property->delete()) {
+      
+        return response()->json(['msg' => 'deletion failed'], 404);
+      }
+
+      $response = [
+          'msg'=>'Property deleted Successfully'
+      ];
+
+      return response()->json($response,200);
+
+    
+    }
 }
+
