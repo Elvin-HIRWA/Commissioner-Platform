@@ -78,7 +78,7 @@ class PropertiesController extends Controller
         ]);
 
         $property = Property::find($id);
-        $type = Property::find($type);
+        $type =$request->input('type');
         $location = $request->input('location');
         $image_path = $request->input('image_path');
         $status = $request->input('status');
@@ -87,6 +87,14 @@ class PropertiesController extends Controller
         $property->location = $location;
         $property->image_path = $image_path;
         $property->status = $sttus;
+
+        $response = [
+            'msg' => 'Property update successfully',
+            'property' =>$property
+        ];
+
+
+        return response()->json($response, 200);
         
 
     
@@ -101,6 +109,19 @@ class PropertiesController extends Controller
      */
     public function destroy($id)
     {
-        return "bad";
+       $property =Property::find($id);
+
+       if (!$property->delete()) {
+      
+        return response()->json(['msg' => 'deletion failed'], 404);
+      }
+
+      $response = [
+          'msg'=>'Property deleted Successfully'
+      ];
+
+      return response()->json($response,200);
+
+    
     }
 }
