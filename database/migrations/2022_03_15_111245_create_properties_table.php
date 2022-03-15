@@ -17,10 +17,13 @@ return new class extends Migration
             $table->increments('id');
             $table->string('type');
             $table->string('location');
-            $table->string('image_path');
+            //$table->string('image_path')->nullable();
             $table->boolean('status');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('RESTRICT')->onUpdate('CASCADE');
+
         });
     }
 
