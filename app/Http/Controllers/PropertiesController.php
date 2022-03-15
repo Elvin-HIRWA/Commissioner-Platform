@@ -42,7 +42,7 @@ class PropertiesController extends Controller
             'location' => 'required',
             //'image_path' => 'required',
             'status' => 'required',
-            'user_id' => 'required',
+            // 'user_id' => 'required',
             
         ]);
 
@@ -51,13 +51,13 @@ class PropertiesController extends Controller
             'location'=> $request->location,
             //'image_path'=> $request->image_path,
             'status'=> $request->status,
-            'user_id'=> Auth()->user()->id
+            'user_id'=> $request->user_id
 
-            // $article->author_id=Auth::user()->id;
+            // $article->autho;r_id=Auth::user()->id;
             // user_id=>$request->Auth
 
         ]);
-
+            
         return response()->json($property, 201);
     }
 
