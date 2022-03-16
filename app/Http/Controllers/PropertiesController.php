@@ -26,6 +26,7 @@ class PropertiesController extends Controller
     {
         $property= Property::all();
         $response = [
+            "msg" =>'All properties',
             'properties' => $property
         ];
         return response()->json($response, 200);
@@ -46,7 +47,7 @@ class PropertiesController extends Controller
             
         ]);
 
-        $property =  Property::Create([
+           $property =  Property::Create([
             'type'=> $request->type,
             'location'=> $request->location,
             //'image_path'=> $request->image_path,
@@ -76,26 +77,34 @@ class PropertiesController extends Controller
         $this->validate($request, [
             'type' =>'required',
             'location' =>'required',
-            'image_path' =>'required',
-            'status' =>'required'
+            'status' =>'required',
+            'user_id'=> 'required'
              
         ]);
-
-        $property = Property::find($id);
+        
         $type =$request->input('type');
         $location = $request->input('location');
-        $image_path = $request->input('image_path');
         $status = $request->input('status');
+        $user_id =  $request->input('user_id');
+
+        $property = Property::find($id);
+
+      
 
         $property->type = $type;
         $property->location = $location;
-        $property->image_path = $image_path;
         $property->status = $status;
+        $property->user_id = $user_id;
+
+        $property->save();
+
 
         $response = [
             'msg' => 'Property update successfully',
             'property' =>$property
         ];
+        
+        
 
 
         return response()->json($response, 200);
@@ -129,4 +138,3 @@ class PropertiesController extends Controller
     
     }
 }
-
